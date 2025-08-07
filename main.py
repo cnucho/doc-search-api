@@ -1,19 +1,17 @@
-from fastapi import FastAPI
-from typing import Optional
+from fastapi import FastAPI, Query
+from modules.kosha import search_kosha
 
 app = FastAPI()
 
 @app.get("/")
-def read_root():
-    return {"message": "정부문서 검색 API가 작동 중입니다."}
+def home():
+    return {"message": "정부문서 통합 검색 API"}
 
 @app.get("/search")
-def search_documents(keyword: str):
-    # TODO: Replace this placeholder with actual document crawling or API search
-    return {
-        "keyword": keyword,
-        "results": [
-            f"검색 결과 예시 1 for {keyword}",
-            f"검색 결과 예시 2 for {keyword}"
-        ]
-    }
+def search_documents(keyword: str, source: str = Query("kosha")):
+    if source == "kosha":
+        results = search_kosha(keyword)
+    else:
+        results = ["지원하지 않는 기관입니다."]
+
+    return {"keyword": keyword, "source": source, "results": results}
