@@ -1,4 +1,3 @@
-# modules/kosha.py
 import requests
 from bs4 import BeautifulSoup
 
@@ -11,7 +10,6 @@ def search_kosha(keyword: str):
         return [f"검색 실패 (코드 {res.status_code})"]
 
     soup = BeautifulSoup(res.text, "html.parser")
-    titles = soup.select(".bbs-title")  # 실제 구조에 맞게 수정 필요
-    results = [title.text.strip() for title in titles[:5]]  # 상위 5개 문서 제목
-
+    titles = soup.select(".bbs-title")
+    results = [title.text.strip() for title in titles[:5]]
     return results if results else ["검색 결과 없음"]

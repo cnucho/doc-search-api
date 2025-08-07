@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Query
 from modules.kosha import search_kosha
 
-app = FastAPI()
+app = Fast = FastAPI()
 
 @app.get("/")
 def home():
@@ -13,5 +13,4 @@ def search_documents(keyword: str, source: str = Query("kosha")):
         results = search_kosha(keyword)
     else:
         results = ["지원하지 않는 기관입니다."]
-
     return {"keyword": keyword, "source": source, "results": results}
