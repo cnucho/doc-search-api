@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Query
 from modules.kosha import search_kosha
 
-app = Fast = FastAPI()
+app = FastAPI()
 
 @app.get("/")
 def home():
